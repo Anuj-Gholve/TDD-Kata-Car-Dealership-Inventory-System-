@@ -267,4 +267,34 @@ describe("Vehicle API", () => {
         expect(response.body.success).toBe(false);
         expect(response.body.message).toBe("Access denied");
     });
+
+    test("DELETE /api/vehicles/:id should return 403 for non-admin user", async () => {
+
+        const userToken = jwt.sign(
+            {
+                id: 2,
+                email: "user@test.com",
+                role: "user",
+            },
+            process.env.JWT_SECRET
+        );
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            }
+        });
+
+        const response = await request(app)
+            .delete(`/api/vehicles/${vehicle.id}`)
+            .set("Authorization", `Bearer ${userToken}`);
+
+        expect(response.statusCode).toBe(403);
+        expect(response.body.success).toBe(false);
+        expect(response.body.message).toBe("Access forbidden");
+    });
 });
