@@ -173,4 +173,35 @@ describe("Vehicle API", () => {
 
         expect(deletedVehicle).toBeNull();
     });
+
+    test("POST /api/vehicles/:id/purchase should reduce vehicle quantity", async () => {
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            }
+        });
+
+        const response = await request(app)
+            .post(`/api/vehicles/${vehicle.id}/purchase`)
+            .send({
+                quantity: 2
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("Vehicle purchased successfully");
+
+        const updatedVehicle = await prisma.vehicle.findUnique({
+            where: {
+                id: vehicle.id
+            }
+        });
+
+        expect(updatedVehicle.quantity).toBe(3);
+    });
 });

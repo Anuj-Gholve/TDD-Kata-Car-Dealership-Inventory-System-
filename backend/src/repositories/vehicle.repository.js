@@ -37,10 +37,31 @@ const deleteVehicle = async (id) => {
     });
 };
 
+const findVehicleById = async (id) => {
+    return prisma.vehicle.findUnique({
+        where: {
+            id: Number(id),
+        },
+    });
+};
+
+const purchaseVehicle = async (id, quantity) => {
+    return prisma.vehicle.update({
+        where: {
+            id: Number(id),
+        },
+        data: {
+            quantity,
+        },
+    });
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
     searchVehicles,
     updateVehicle,
     deleteVehicle,
+    findVehicleById,
+    purchaseVehicle,
 };

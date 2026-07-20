@@ -68,10 +68,27 @@ const deleteVehicle = async (req, res) => {
     }
 };
 
+const purchaseVehicle = async (req, res) => {
+    try {
+        const result = await vehicleService.purchaseVehicle(
+            req.params.id,
+            req.body.quantity
+        );
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
     searchVehicles,
     updateVehicle,
     deleteVehicle,
+    purchaseVehicle,
 };
