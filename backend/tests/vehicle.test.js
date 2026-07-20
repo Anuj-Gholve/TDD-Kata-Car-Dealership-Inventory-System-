@@ -297,4 +297,178 @@ describe("Vehicle API", () => {
         expect(response.body.success).toBe(false);
         expect(response.body.message).toBe("Access forbidden");
     });
+
+    test("GET /api/vehicles/search should return vehicles by model", async () => {
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5,
+                },
+                {
+                    make: "Toyota",
+                    model: "Innova",
+                    category: "MPV",
+                    price: 3000000,
+                    quantity: 3,
+                },
+            ],
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
+            .query({
+                model: "Fortuner",
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+        expect(response.body.data[0].model).toBe("Fortuner");
+    });
+
+    test("GET /api/vehicles/search should return vehicles by category", async () => {
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5,
+                },
+                {
+                    make: "Honda",
+                    model: "City",
+                    category: "Sedan",
+                    price: 1500000,
+                    quantity: 8,
+                },
+            ],
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
+            .query({
+                category: "SUV",
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+        expect(response.body.data[0].category).toBe("SUV");
+    });
+
+    test("GET /api/vehicles/search should return vehicles by minimum price", async () => {
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5,
+                },
+                {
+                    make: "Honda",
+                    model: "City",
+                    category: "Sedan",
+                    price: 1500000,
+                    quantity: 8,
+                },
+            ],
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
+            .query({
+                minPrice: 3000000,
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+        expect(response.body.data[0].price).toBe(4500000);
+    });
+
+    test("GET /api/vehicles/search should return vehicles by maximum price", async () => {
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5,
+                },
+                {
+                    make: "Honda",
+                    model: "City",
+                    category: "Sedan",
+                    price: 1500000,
+                    quantity: 8,
+                },
+            ],
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
+            .query({
+                maxPrice: 2000000,
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+        expect(response.body.data[0].model).toBe("City");
+    });
+
+    test("GET /api/vehicles/search should return vehicles using multiple filters", async () => {
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5,
+                },
+                {
+                    make: "Toyota",
+                    model: "Innova",
+                    category: "MPV",
+                    price: 3000000,
+                    quantity: 3,
+                },
+                {
+                    make: "Honda",
+                    model: "City",
+                    category: "Sedan",
+                    price: 1500000,
+                    quantity: 8,
+                },
+            ],
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
+            .query({
+                make: "Toyota",
+                category: "SUV",
+                minPrice: 4000000,
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+        expect(response.body.data[0].model).toBe("Fortuner");
+    });
 });

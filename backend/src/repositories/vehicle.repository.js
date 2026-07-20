@@ -10,13 +10,43 @@ const getAllVehicles = async () => {
     return prisma.vehicle.findMany();
 };
 
-const searchVehicles = async (make) => {
+const searchVehicles = async (filters) => {
+    const { make, model, category, minPrice, maxPrice } = filters;
+
+    const where = {};
+
+    if (make) {
+        where.make = {
+            contains: make,
+        };
+    }
+
+    if (model) {
+        where.model = {
+            contains: model,
+        };
+    }
+
+    if (category) {
+        where.category = {
+            contains: category,
+        };
+    }
+
+    if (minPrice || maxPrice) {
+        where.price = {};
+
+        if (minPrice) {
+            where.price.gte = Number(minPrice);
+        }
+
+        if (maxPrice) {
+            where.price.lte = Number(maxPrice);
+        }
+    }
+
     return prisma.vehicle.findMany({
-        where: {
-            make: {
-                contains: make,
-            },
-        },
+        where,
     });
 };
 

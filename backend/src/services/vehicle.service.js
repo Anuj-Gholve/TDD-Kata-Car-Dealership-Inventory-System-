@@ -19,8 +19,8 @@ const getAllVehicles = async () => {
     };
 };
 
-const searchVehicles = async (make) => {
-    const vehicles = await vehicleRepository.searchVehicles(make);
+const searchVehicles = async (filters) => {
+    const vehicles = await vehicleRepository.searchVehicles(filters);
 
     return {
         success: true,
@@ -38,7 +38,6 @@ const updateVehicle = async (id, vehicleData) => {
     };
 };
 
-
 const deleteVehicle = async (id) => {
     await vehicleRepository.deleteVehicle(id);
 
@@ -49,7 +48,6 @@ const deleteVehicle = async (id) => {
 };
 
 const purchaseVehicle = async (id, purchaseQuantity) => {
-
     const vehicle = await vehicleRepository.findVehicleById(id);
 
     if (!vehicle) {
@@ -73,7 +71,6 @@ const purchaseVehicle = async (id, purchaseQuantity) => {
 };
 
 const restockVehicle = async (id, restockQuantity) => {
-
     const vehicle = await vehicleRepository.findVehicleById(id);
 
     if (!vehicle) {
@@ -91,6 +88,7 @@ const restockVehicle = async (id, restockQuantity) => {
         data: updatedVehicle,
     };
 };
+
 module.exports = {
     createVehicle,
     getAllVehicles,

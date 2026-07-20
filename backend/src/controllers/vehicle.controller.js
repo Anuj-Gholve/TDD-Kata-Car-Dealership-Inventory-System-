@@ -28,7 +28,7 @@ const getAllVehicles = async (req, res) => {
 
 const searchVehicles = async (req, res) => {
     try {
-        const result = await vehicleService.searchVehicles(req.query.make);
+        const result = await vehicleService.searchVehicles(req.query);
 
         res.status(200).json(result);
     } catch (error) {
