@@ -1,11 +1,22 @@
+const jwt = require("jsonwebtoken");
 const request = require("supertest");
 const app = require("../src/app");
 const prisma = require("../src/utils/prisma");
 
 describe("Vehicle API", () => {
+    let token;
 
     beforeEach(async () => {
         await prisma.vehicle.deleteMany();
+
+        token = jwt.sign(
+            {
+                id: 1,
+                email: "admin@test.com",
+                role: "admin",
+            },
+            process.env.JWT_SECRET
+        );
     });
 
     afterAll(async () => {
@@ -16,6 +27,7 @@ describe("Vehicle API", () => {
 
         const response = await request(app)
             .post("/api/vehicles")
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 make: "Toyota",
                 model: "Fortuner",
@@ -60,10 +72,9 @@ describe("Vehicle API", () => {
             ]
         });
 
-
-
         const response = await request(app)
-            .get("/api/vehicles");
+            .get("/api/vehicles")
+            .set("Authorization", `Bearer ${token}`);
 
         expect(response.statusCode).toBe(200);
         expect(response.body.success).toBe(true);
@@ -96,6 +107,7 @@ describe("Vehicle API", () => {
 
         const response = await request(app)
             .get("/api/vehicles/search")
+            .set("Authorization", `Bearer ${token}`)
             .query({
                 make: "Toyota"
             });
@@ -122,6 +134,7 @@ describe("Vehicle API", () => {
 
         const response = await request(app)
             .put(`/api/vehicles/${vehicle.id}`)
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 make: "Toyota",
                 model: "Fortuner Legender",
@@ -145,7 +158,6 @@ describe("Vehicle API", () => {
         expect(updatedVehicle.quantity).toBe(7);
     });
 
-
     test("DELETE /api/vehicles/:id should delete a vehicle", async () => {
 
         const vehicle = await prisma.vehicle.create({
@@ -159,7 +171,8 @@ describe("Vehicle API", () => {
         });
 
         const response = await request(app)
-            .delete(`/api/vehicles/${vehicle.id}`);
+            .delete(`/api/vehicles/${vehicle.id}`)
+            .set("Authorization", `Bearer ${token}`);
 
         expect(response.statusCode).toBe(200);
         expect(response.body.success).toBe(true);
@@ -188,6 +201,7 @@ describe("Vehicle API", () => {
 
         const response = await request(app)
             .post(`/api/vehicles/${vehicle.id}/purchase`)
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 quantity: 2
             });
@@ -219,6 +233,7 @@ describe("Vehicle API", () => {
 
         const response = await request(app)
             .post(`/api/vehicles/${vehicle.id}/restock`)
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 quantity: 3
             });
@@ -236,4 +251,20 @@ describe("Vehicle API", () => {
         expect(updatedVehicle.quantity).toBe(8);
     });
 
+    test("POST /api/vehicles should return 401 when token is missing", async () => {
+
+        const response = await request(app)
+            .post("/api/vehicles")
+            .send({
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            });
+
+        expect(response.statusCode).toBe(401);
+        expect(response.body.success).toBe(false);
+        expect(response.body.message).toBe("Access denied");
+    });
 });

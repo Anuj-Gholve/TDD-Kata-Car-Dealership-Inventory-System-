@@ -1,13 +1,18 @@
 const express = require("express");
+const verifyToken = require("../middlewares/auth.middleware");
 const vehicleController = require("../controllers/vehicle.controller");
 
 const router = express.Router();
-router.post("/:id/restock", vehicleController.restockVehicle);
-router.post("/:id/purchase", vehicleController.purchaseVehicle);
-router.delete("/:id", vehicleController.deleteVehicle);
-router.put("/:id", vehicleController.updateVehicle);
-router.get("/search", vehicleController.searchVehicles);
-router.get("/", vehicleController.getAllVehicles);
-router.post("/", vehicleController.createVehicle);
+
+// Protected Vehicle Routes
+router.get("/search", verifyToken, vehicleController.searchVehicles);
+router.get("/", verifyToken, vehicleController.getAllVehicles);
+router.post("/", verifyToken, vehicleController.createVehicle);
+
+router.post("/:id/purchase", verifyToken, vehicleController.purchaseVehicle);
+router.post("/:id/restock", verifyToken, vehicleController.restockVehicle);
+
+router.put("/:id", verifyToken, vehicleController.updateVehicle);
+router.delete("/:id", verifyToken, vehicleController.deleteVehicle);
 
 module.exports = router;
