@@ -204,4 +204,36 @@ describe("Vehicle API", () => {
 
         expect(updatedVehicle.quantity).toBe(3);
     });
+
+    test("POST /api/vehicles/:id/restock should increase vehicle quantity", async () => {
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            }
+        });
+
+        const response = await request(app)
+            .post(`/api/vehicles/${vehicle.id}/restock`)
+            .send({
+                quantity: 3
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("Vehicle restocked successfully");
+
+        const updatedVehicle = await prisma.vehicle.findUnique({
+            where: {
+                id: vehicle.id
+            }
+        });
+
+        expect(updatedVehicle.quantity).toBe(8);
+    });
+
 });

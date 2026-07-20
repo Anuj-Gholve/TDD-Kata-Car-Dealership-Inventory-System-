@@ -56,6 +56,17 @@ const purchaseVehicle = async (id, quantity) => {
     });
 };
 
+const restockVehicle = async (id, quantity) => {
+    return prisma.vehicle.update({
+        where: {
+            id: Number(id),
+        },
+        data: {
+            quantity,
+        },
+    });
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
@@ -64,4 +75,5 @@ module.exports = {
     deleteVehicle,
     findVehicleById,
     purchaseVehicle,
+    restockVehicle,
 };

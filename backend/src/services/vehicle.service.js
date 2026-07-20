@@ -72,6 +72,25 @@ const purchaseVehicle = async (id, purchaseQuantity) => {
     };
 };
 
+const restockVehicle = async (id, restockQuantity) => {
+
+    const vehicle = await vehicleRepository.findVehicleById(id);
+
+    if (!vehicle) {
+        throw new Error("Vehicle not found");
+    }
+
+    const updatedVehicle = await vehicleRepository.restockVehicle(
+        id,
+        vehicle.quantity + restockQuantity
+    );
+
+    return {
+        success: true,
+        message: "Vehicle restocked successfully",
+        data: updatedVehicle,
+    };
+};
 module.exports = {
     createVehicle,
     getAllVehicles,
@@ -79,4 +98,5 @@ module.exports = {
     updateVehicle,
     deleteVehicle,
     purchaseVehicle,
+    restockVehicle,
 };
