@@ -1,3 +1,4 @@
+const vehicleRoutes = require("./routes/vehicle.routes");
 const express = require("express");
 const cors = require("cors");
 
@@ -16,5 +17,5 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/vehicles", vehicleRoutes);
 module.exports = app;
