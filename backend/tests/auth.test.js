@@ -59,4 +59,30 @@ describe("Authentication API", () => {
         expect(response.body.message).toBe("Email already exists");
     });
 
+    test("POST /api/auth/login should login successfully with valid credentials", async () => {
+
+        const user = {
+            name: "Anuj",
+            email: "anuj@example.com",
+            password: "password123"
+        };
+
+        await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: user.email,
+                password: user.password
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("Login successful");
+        expect(response.body.token).toBeDefined();
+        expect(typeof response.body.token).toBe("string");
+    });
+
 });
