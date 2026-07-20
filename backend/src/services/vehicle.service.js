@@ -38,9 +38,20 @@ const updateVehicle = async (id, vehicleData) => {
     };
 };
 
+
+const deleteVehicle = async (id) => {
+    await vehicleRepository.deleteVehicle(id);
+
+    return {
+        success: true,
+        message: "Vehicle deleted successfully",
+    };
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
     searchVehicles,
     updateVehicle,
+    deleteVehicle,
 };

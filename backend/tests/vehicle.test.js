@@ -145,4 +145,32 @@ describe("Vehicle API", () => {
         expect(updatedVehicle.quantity).toBe(7);
     });
 
+
+    test("DELETE /api/vehicles/:id should delete a vehicle", async () => {
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            }
+        });
+
+        const response = await request(app)
+            .delete(`/api/vehicles/${vehicle.id}`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("Vehicle deleted successfully");
+
+        const deletedVehicle = await prisma.vehicle.findUnique({
+            where: {
+                id: vehicle.id
+            }
+        });
+
+        expect(deletedVehicle).toBeNull();
+    });
 });
