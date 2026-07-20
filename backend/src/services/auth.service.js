@@ -2,6 +2,11 @@ const bcrypt = require("bcrypt");
 const authRepository = require("../repositories/auth.repository");
 
 const register = async (userData) => {
+    const existingUser = await authRepository.findUserByEmail(userData.email);
+
+    if (existingUser) {
+        throw new Error("Email already exists");
+    }
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 

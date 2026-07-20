@@ -33,7 +33,30 @@ describe("Authentication API", () => {
         expect(user).not.toBeNull();
         expect(user.name).toBe("Anuj");
         expect(user.email).toBe("anuj@example.com");
+
+        // Password should not be stored in plain text
         expect(user.password).not.toBe("password123");
+    });
+
+    test("POST /api/auth/register should return 409 if email already exists", async () => {
+
+        const user = {
+            name: "Anuj",
+            email: "anuj@example.com",
+            password: "password123"
+        };
+
+        await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+        const response = await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+        expect(response.statusCode).toBe(409);
+        expect(response.body.success).toBe(false);
+        expect(response.body.message).toBe("Email already exists");
     });
 
 });
