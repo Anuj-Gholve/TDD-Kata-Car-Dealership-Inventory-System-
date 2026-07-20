@@ -39,8 +39,25 @@ const searchVehicles = async (req, res) => {
     }
 };
 
+const updateVehicle = async (req, res) => {
+    try {
+        const result = await vehicleService.updateVehicle(
+            req.params.id,
+            req.body
+        );
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
     searchVehicles,
+    updateVehicle,
 };

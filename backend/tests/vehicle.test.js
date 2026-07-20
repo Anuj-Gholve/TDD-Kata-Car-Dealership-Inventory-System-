@@ -108,4 +108,41 @@ describe("Vehicle API", () => {
         expect(response.body.data[0].model).toBe("Fortuner");
     });
 
+    test("PUT /api/vehicles/:id should update a vehicle", async () => {
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantity: 5
+            }
+        });
+
+        const response = await request(app)
+            .put(`/api/vehicles/${vehicle.id}`)
+            .send({
+                make: "Toyota",
+                model: "Fortuner Legender",
+                category: "SUV",
+                price: 4700000,
+                quantity: 7
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("Vehicle updated successfully");
+
+        const updatedVehicle = await prisma.vehicle.findUnique({
+            where: {
+                id: vehicle.id
+            }
+        });
+
+        expect(updatedVehicle.model).toBe("Fortuner Legender");
+        expect(updatedVehicle.price).toBe(4700000);
+        expect(updatedVehicle.quantity).toBe(7);
+    });
+
 });

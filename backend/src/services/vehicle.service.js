@@ -28,8 +28,19 @@ const searchVehicles = async (make) => {
     };
 };
 
+const updateVehicle = async (id, vehicleData) => {
+    const vehicle = await vehicleRepository.updateVehicle(id, vehicleData);
+
+    return {
+        success: true,
+        message: "Vehicle updated successfully",
+        data: vehicle,
+    };
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
     searchVehicles,
+    updateVehicle,
 };
