@@ -10,6 +10,16 @@ const createVehicle = async (vehicleData) => {
     };
 };
 
+const getAllVehicles = async () => {
+    const vehicles = await vehicleRepository.getAllVehicles();
+
+    return {
+        success: true,
+        data: vehicles,
+    };
+};
+
 module.exports = {
     createVehicle,
+    getAllVehicles,
 };

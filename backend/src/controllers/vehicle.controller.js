@@ -13,6 +13,20 @@ const createVehicle = async (req, res) => {
     }
 };
 
+const getAllVehicles = async (req, res) => {
+    try {
+        const result = await vehicleService.getAllVehicles();
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     createVehicle,
+    getAllVehicles,
 };
