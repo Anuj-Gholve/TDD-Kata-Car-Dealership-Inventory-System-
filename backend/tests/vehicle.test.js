@@ -60,6 +60,8 @@ describe("Vehicle API", () => {
             ]
         });
 
+
+
         const response = await request(app)
             .get("/api/vehicles");
 
@@ -69,6 +71,41 @@ describe("Vehicle API", () => {
 
         expect(response.body.data[0].make).toBe("Toyota");
         expect(response.body.data[1].make).toBe("Honda");
+    });
+
+    test("GET /api/vehicles/search should return matching vehicles by make", async () => {
+
+        await prisma.vehicle.createMany({
+            data: [
+                {
+                    make: "Toyota",
+                    model: "Fortuner",
+                    category: "SUV",
+                    price: 4500000,
+                    quantity: 5
+                },
+                {
+                    make: "Honda",
+                    model: "City",
+                    category: "Sedan",
+                    price: 1500000,
+                    quantity: 8
+                }
+            ]
+        });
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .query({
+                make: "Toyota"
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.success).toBe(true);
+        expect(response.body.data.length).toBe(1);
+
+        expect(response.body.data[0].make).toBe("Toyota");
+        expect(response.body.data[0].model).toBe("Fortuner");
     });
 
 });

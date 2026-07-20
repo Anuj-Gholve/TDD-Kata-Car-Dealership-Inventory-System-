@@ -19,7 +19,17 @@ const getAllVehicles = async () => {
     };
 };
 
+const searchVehicles = async (make) => {
+    const vehicles = await vehicleRepository.searchVehicles(make);
+
+    return {
+        success: true,
+        data: vehicles,
+    };
+};
+
 module.exports = {
     createVehicle,
     getAllVehicles,
+    searchVehicles,
 };
