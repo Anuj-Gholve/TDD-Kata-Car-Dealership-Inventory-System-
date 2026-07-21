@@ -37,72 +37,115 @@ function Register() {
         }
     };
 
+    const inputClassName =
+        "w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors focus:border-slate-400 focus:ring-1 focus:ring-slate-200";
+
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-100">
+        <div className="flex min-h-screen items-center justify-center bg-[#f4f5f7] px-4">
+            <div className="w-full max-w-sm">
+                <div className="mb-6 text-center">
+                    <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-slate-900 text-[10px] font-bold text-white">
+                        VI
+                    </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+                    <h1 className="text-lg font-semibold text-slate-900">
+                        Create your account
+                    </h1>
 
-                <h1 className="text-3xl font-bold mb-6 text-center">
-                    Register
-                </h1>
-
-                {error && (
-                    <p className="text-red-500 mb-4">
-                        {error}
+                    <p className="mt-1 text-xs text-slate-500">
+                        Get started with vehicle inventory management
                     </p>
-                )}
+                </div>
 
-                <form onSubmit={handleSubmit}>
+                <div className="rounded-lg border border-slate-200 bg-white p-5">
+                    {error && (
+                        <div
+                            role="alert"
+                            className="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-600"
+                        >
+                            {error}
+                        </div>
+                    )}
 
-                    <input
-                        className="w-full border p-3 rounded mb-4"
-                        name="name"
-                        placeholder="Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label
+                                htmlFor="name"
+                                className="mb-1 block text-xs font-medium text-slate-600"
+                            >
+                                Full name
+                            </label>
 
-                    <input
-                        className="w-full border p-3 rounded mb-4"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
+                            <input
+                                id="name"
+                                className={inputClassName}
+                                name="name"
+                                placeholder="Jane Smith"
+                                value={formData.name}
+                                onChange={handleChange}
+                                autoComplete="name"
+                            />
+                        </div>
 
-                    <input
-                        className="w-full border p-3 rounded mb-6"
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
+                        <div>
+                            <label
+                                htmlFor="email"
+                                className="mb-1 block text-xs font-medium text-slate-600"
+                            >
+                                Email
+                            </label>
 
-                    <button
-                        className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700"
-                    >
-                        Register
-                    </button>
+                            <input
+                                id="email"
+                                className={inputClassName}
+                                name="email"
+                                type="email"
+                                placeholder="you@company.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                            />
+                        </div>
 
-                </form>
+                        <div>
+                            <label
+                                htmlFor="password"
+                                className="mb-1 block text-xs font-medium text-slate-600"
+                            >
+                                Password
+                            </label>
 
-                <p className="text-center mt-4">
+                            <input
+                                id="password"
+                                className={inputClassName}
+                                name="password"
+                                type="password"
+                                placeholder="Create a password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+                        </div>
 
-                    Already have an account?
+                        <button
+                            type="submit"
+                            className="flex h-8 w-full items-center justify-center rounded-md bg-slate-900 text-xs font-medium text-white transition-colors hover:bg-slate-800"
+                        >
+                            Create account
+                        </button>
+                    </form>
+                </div>
 
+                <p className="mt-4 text-center text-xs text-slate-500">
+                    Already have an account?{" "}
                     <Link
                         to="/login"
-                        className="text-blue-600 ml-1"
+                        className="font-medium text-slate-900 hover:underline"
                     >
-                        Login
+                        Sign in
                     </Link>
-
                 </p>
-
             </div>
-
         </div>
     );
 }

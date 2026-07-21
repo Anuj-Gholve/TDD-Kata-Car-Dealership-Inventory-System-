@@ -44,13 +44,13 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
     };
 
     const inputClassName =
-        "w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
+        "w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors focus:border-slate-400 focus:ring-1 focus:ring-slate-200";
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                    <label htmlFor="make" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    <label htmlFor="make" className="mb-1 block text-xs font-medium text-slate-600">
                         Make
                     </label>
 
@@ -66,7 +66,7 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
                 </div>
 
                 <div>
-                    <label htmlFor="model" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    <label htmlFor="model" className="mb-1 block text-xs font-medium text-slate-600">
                         Model
                     </label>
 
@@ -82,7 +82,7 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
                 </div>
 
                 <div>
-                    <label htmlFor="category" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    <label htmlFor="category" className="mb-1 block text-xs font-medium text-slate-600">
                         Category
                     </label>
 
@@ -98,7 +98,7 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
                 </div>
 
                 <div>
-                    <label htmlFor="price" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    <label htmlFor="price" className="mb-1 block text-xs font-medium text-slate-600">
                         Price
                     </label>
 
@@ -114,7 +114,7 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                    <label htmlFor="quantity" className="mb-1.5 block text-sm font-medium text-slate-700">
+                    <label htmlFor="quantity" className="mb-1 block text-xs font-medium text-slate-600">
                         Quantity
                     </label>
 
@@ -132,7 +132,7 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
 
             <button
                 type="submit"
-                className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700"
+                className="flex h-8 w-full items-center justify-center rounded-md bg-slate-900 text-xs font-medium text-white transition-colors hover:bg-slate-800"
             >
                 {submitText}
             </button>

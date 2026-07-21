@@ -24,8 +24,9 @@ function EditVehicleModal({
 
             <div className="mt-4 flex justify-end border-t border-slate-200 pt-4">
                 <button
+                    type="button"
                     onClick={onClose}
-                    className="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-50"
+                    className="inline-flex h-8 items-center rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50"
                 >
                     Cancel
                 </button>

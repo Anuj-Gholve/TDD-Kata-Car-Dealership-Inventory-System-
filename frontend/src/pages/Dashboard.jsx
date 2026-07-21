@@ -171,19 +171,21 @@ function Dashboard() {
         }
     };
 
+    const filterInputClassName =
+        "w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors focus:border-slate-400 focus:ring-1 focus:ring-slate-200";
+
     return (
-        <div className="min-h-screen bg-slate-100">
+        <div className="min-h-screen bg-[#f4f5f7]">
             <Navbar />
 
-            <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
-                {/* Hero */}
-                <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <main className="mx-auto max-w-7xl space-y-5 px-4 py-6 sm:px-6">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
-                        <h1 className="text-4xl font-bold text-slate-900">
+                        <h1 className="text-lg font-semibold text-slate-900">
                             Vehicle Inventory
                         </h1>
 
-                        <p className="mt-2 text-slate-500">
+                        <p className="mt-0.5 text-xs text-slate-500">
                             Manage, search and maintain your vehicle inventory.
                         </p>
                     </div>
@@ -191,15 +193,16 @@ function Dashboard() {
                     {isAdmin && (
                         <button
                             onClick={() => setShowAddModal(true)}
-                            className="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+                            className="inline-flex h-8 shrink-0 items-center justify-center rounded-md bg-slate-900 px-3.5 text-xs font-medium text-white transition-colors hover:bg-slate-800"
                         >
-                            + Add Vehicle
+                            Add Vehicle
                         </button>
                     )}
                 </div>
 
                 {/* Statistics */}
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                <section aria-label="Inventory statistics">
+                    <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
                     <StatsCard
                         title="Total Vehicles"
                         value={totalVehicles}
@@ -219,112 +222,144 @@ function Dashboard() {
                         title="Categories"
                         value={totalCategories}
                     />
-                </div>
+                    </div>
+                </section>
 
                 {/* Search */}
-                <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div className="mb-5 flex flex-col gap-1">
-                        <h2 className="text-lg font-semibold text-slate-900">
+                <section
+                    aria-label="Search and filters"
+                    className="rounded-lg border border-slate-200 bg-white p-4"
+                >
+                    <div className="mb-3.5 flex flex-col gap-0.5">
+                        <h2 className="text-sm font-semibold text-slate-900">
                             Search & Filters
                         </h2>
 
-                        <p className="text-sm text-slate-500">
-                            Search vehicles by make, model, category or price
-                            range.
+                        <p className="text-xs text-slate-500">
+                            Filter by make, model, category or price range.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
-                        <input
-                            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            placeholder="Make"
-                            name="make"
-                            value={filters.make}
-                            onChange={handleChange}
-                        />
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
+                        <div>
+                            <label htmlFor="filter-make" className="mb-1 block text-xs font-medium text-slate-500">
+                                Make
+                            </label>
+                            <input
+                                id="filter-make"
+                                className={filterInputClassName}
+                                placeholder="e.g. Toyota"
+                                name="make"
+                                value={filters.make}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                        <input
-                            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            placeholder="Model"
-                            name="model"
-                            value={filters.model}
-                            onChange={handleChange}
-                        />
+                        <div>
+                            <label htmlFor="filter-model" className="mb-1 block text-xs font-medium text-slate-500">
+                                Model
+                            </label>
+                            <input
+                                id="filter-model"
+                                className={filterInputClassName}
+                                placeholder="e.g. Fortuner"
+                                name="model"
+                                value={filters.model}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                        <input
-                            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            placeholder="Category"
-                            name="category"
-                            value={filters.category}
-                            onChange={handleChange}
-                        />
+                        <div>
+                            <label htmlFor="filter-category" className="mb-1 block text-xs font-medium text-slate-500">
+                                Category
+                            </label>
+                            <input
+                                id="filter-category"
+                                className={filterInputClassName}
+                                placeholder="e.g. SUV"
+                                name="category"
+                                value={filters.category}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                        <input
-                            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            placeholder="Minimum Price"
-                            type="number"
-                            name="minPrice"
-                            value={filters.minPrice}
-                            onChange={handleChange}
-                        />
+                        <div>
+                            <label htmlFor="filter-min-price" className="mb-1 block text-xs font-medium text-slate-500">
+                                Min price
+                            </label>
+                            <input
+                                id="filter-min-price"
+                                className={filterInputClassName}
+                                placeholder="0"
+                                type="number"
+                                name="minPrice"
+                                value={filters.minPrice}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                        <input
-                            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            placeholder="Maximum Price"
-                            type="number"
-                            name="maxPrice"
-                            value={filters.maxPrice}
-                            onChange={handleChange}
-                        />
+                        <div>
+                            <label htmlFor="filter-max-price" className="mb-1 block text-xs font-medium text-slate-500">
+                                Max price
+                            </label>
+                            <input
+                                id="filter-max-price"
+                                className={filterInputClassName}
+                                placeholder="Any"
+                                type="number"
+                                name="maxPrice"
+                                value={filters.maxPrice}
+                                onChange={handleChange}
+                            />
+                        </div>
                     </div>
 
-                    <div className="mt-5 flex justify-end">
+                    <div className="mt-3.5 flex justify-end">
                         <button
                             onClick={clearFilters}
-                            className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                            className="inline-flex h-7 items-center rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-600 transition-colors hover:bg-slate-50"
                         >
                             Clear Filters
                         </button>
                     </div>
-                </div>
+                </section>
 
-                <div className="flex items-center justify-between">
-                    <div>
-                        <h2 className="text-xl font-semibold text-slate-900">
+                <section aria-label="Vehicle inventory">
+                    <div className="mb-3">
+                        <h2 className="text-sm font-semibold text-slate-900">
                             Inventory
                         </h2>
 
-                        <p className="text-sm text-slate-500">
+                        <p className="mt-0.5 text-xs text-slate-500">
                             {vehicles.length} vehicle{vehicles.length !== 1 ? "s" : ""} found
                         </p>
                     </div>
-                </div>
 
-                {/* Vehicle Grid */}
-                {vehicles.length === 0 ? (
-                    <div className="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm">
-                        <h3 className="text-xl font-semibold text-slate-900">
-                            No vehicles found
-                        </h3>
+                    {vehicles.length === 0 ? (
+                        <div className="rounded-lg border border-slate-200 bg-white px-5 py-10 text-center">
+                            <p className="text-sm font-medium text-slate-900">
+                                No vehicles found
+                            </p>
 
-                        <p className="mt-2 text-slate-500">
-                            Try changing or clearing your search filters.
-                        </p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                        {vehicles.map((vehicle) => (
-                            <VehicleCard
-                                key={vehicle.id}
-                                vehicle={vehicle}
-                                onPurchase={handlePurchase}
-                                onEdit={handleEdit}
-                                onDelete={handleDelete}
-                                onRestock={handleRestock}
-                            />
-                        ))}
-                    </div>
-                )}
+                            <p className="mx-auto mt-1 max-w-xs text-xs text-slate-500">
+                                Try changing or clearing your search filters to see available inventory.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                            {vehicles.map((vehicle) => (
+                                <VehicleCard
+                                    key={vehicle.id}
+                                    vehicle={vehicle}
+                                    onPurchase={handlePurchase}
+                                    onEdit={handleEdit}
+                                    onDelete={handleDelete}
+                                    onRestock={handleRestock}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </section>
             </main>
 
             <AddVehicleModal

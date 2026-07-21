@@ -37,62 +37,97 @@ function Login() {
         }
     };
 
+    const inputClassName =
+        "w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors focus:border-slate-400 focus:ring-1 focus:ring-slate-200";
+
     return (
-        <div className="min-h-screen flex justify-center items-center bg-slate-100">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+        <div className="flex min-h-screen items-center justify-center bg-[#f4f5f7] px-4">
+            <div className="w-full max-w-sm">
+                <div className="mb-6 text-center">
+                    <div className="mx-auto mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-slate-900 text-[10px] font-bold text-white">
+                        VI
+                    </div>
 
-                <h1 className="text-3xl font-bold text-center mb-6">
-                    Login
-                </h1>
+                    <h1 className="text-lg font-semibold text-slate-900">
+                        Sign in to your account
+                    </h1>
 
-                {error && (
-                    <p className="text-red-500 mb-4">
-                        {error}
+                    <p className="mt-1 text-xs text-slate-500">
+                        Access your vehicle inventory dashboard
                     </p>
-                )}
+                </div>
 
-                <form onSubmit={handleSubmit}>
+                <div className="rounded-lg border border-slate-200 bg-white p-5">
+                    {error && (
+                        <div
+                            role="alert"
+                            className="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-600"
+                        >
+                            {error}
+                        </div>
+                    )}
 
-                    <input
-                        className="w-full border p-3 rounded mb-4"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label
+                                htmlFor="email"
+                                className="mb-1 block text-xs font-medium text-slate-600"
+                            >
+                                Email
+                            </label>
 
-                    <input
-                        className="w-full border p-3 rounded mb-4"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                            <input
+                                id="email"
+                                className={inputClassName}
+                                type="email"
+                                name="email"
+                                placeholder="you@company.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                autoComplete="email"
+                            />
+                        </div>
 
-                    <button
-                        className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
-                    >
-                        Login
-                    </button>
+                        <div>
+                            <label
+                                htmlFor="password"
+                                className="mb-1 block text-xs font-medium text-slate-600"
+                            >
+                                Password
+                            </label>
 
-                </form>
+                            <input
+                                id="password"
+                                className={inputClassName}
+                                type="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                autoComplete="current-password"
+                            />
+                        </div>
 
-                <p className="mt-4 text-center">
-                    Don't have an account?
+                        <button
+                            type="submit"
+                            className="flex h-8 w-full items-center justify-center rounded-md bg-slate-900 text-xs font-medium text-white transition-colors hover:bg-slate-800"
+                        >
+                            Sign in
+                        </button>
+                    </form>
+                </div>
 
+                <p className="mt-4 text-center text-xs text-slate-500">
+                    Don&apos;t have an account?{" "}
                     <Link
-                        className="text-blue-600 ml-1"
+                        className="font-medium text-slate-900 hover:underline"
                         to="/register"
                     >
-                        Register
+                        Create account
                     </Link>
-
                 </p>
-
             </div>
         </div>
     );

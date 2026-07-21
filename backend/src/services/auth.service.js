@@ -26,7 +26,6 @@ const register = async (userData) => {
 };
 
 const login = async (loginData) => {
-
     const user = await authRepository.findUserByEmail(loginData.email);
 
     if (!user) {
@@ -48,8 +47,10 @@ const login = async (loginData) => {
         success: true,
         message: "Login successful",
         token,
+        role: user.role,
     };
 };
+
 module.exports = {
     register,
     login,
