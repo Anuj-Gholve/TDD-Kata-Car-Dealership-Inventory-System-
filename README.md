@@ -245,31 +245,33 @@ Add screenshots of the following screens.
 
 ---
 
-# AI Usage
+## My AI Usage
 
-This project was developed with the assistance of modern AI development tools, in accordance with the assessment guidelines.
+AI tools were used throughout the development process to improve productivity while maintaining full ownership of the implementation.
 
-## Tools Used
+### Tools Used
 
 - ChatGPT
-- Cursor
+- Cursor AI
 
-## How AI Was Used
+### How AI Was Used
 
-- Brainstorming project architecture
-- Reviewing Express API structure
-- Debugging backend issues
-- Improving React component organization
-- Refining Tailwind CSS layouts
-- Reviewing authentication flow
-- UI/UX improvements
-- Code review and refactoring suggestions
+AI was primarily used as a development assistant for:
 
-All AI-generated suggestions were manually reviewed, adapted, tested, and integrated before becoming part of the final implementation.
+- Brainstorming project structure
+- Designing the frontend UI
+- Reviewing React components
+- Explaining Prisma and SQLite workflows
+- Debugging issues during development
+- Improving code readability
+- Reviewing the final implementation against the assessment requirements
 
-AI accelerated development while maintaining full ownership of the application's architecture, implementation, debugging process, and final decisions.
+All business logic, application architecture, API integration, testing, and project decisions were reviewed, modified, and validated before being incorporated into the final project.
 
 ---
+### Reflection
+
+Using AI significantly accelerated development by reducing time spent on debugging and researching implementation details. Rather than generating an entire application automatically, AI served as a pair programmer for discussion, design feedback, and code reviews while I retained responsibility for understanding, integrating, and testing the final solution.
 
 # Future Improvements
 
