@@ -65,8 +65,27 @@ function Dashboard() {
         console.log("Edit:", vehicle);
     };
 
-    const handleDelete = (vehicle) => {
-        console.log("Delete:", vehicle);
+    const handleDelete = async (vehicle) => {
+        const confirmed = window.confirm(
+            `Are you sure you want to delete ${vehicle.make} ${vehicle.model}?`
+        );
+
+        if (!confirmed) return;
+
+        try {
+            await api.delete(`/vehicles/${vehicle.id}`);
+
+            alert("Vehicle deleted successfully!");
+
+            await loadVehicles();
+        } catch (error) {
+            console.error(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to delete vehicle."
+            );
+        }
     };
 
     return (
