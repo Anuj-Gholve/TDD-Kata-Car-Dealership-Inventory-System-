@@ -1,36 +1,49 @@
 import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-
     const navigate = useNavigate();
 
+    const role = localStorage.getItem("role") || "USER";
+
     const logout = () => {
-
         localStorage.removeItem("token");
-
+        localStorage.removeItem("role");
         navigate("/login");
     };
 
     return (
+        <header className="sticky top-0 z-50 border-b border-slate-200 bg-white">
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+                <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-slate-900 text-xs font-bold text-white">
+                        VI
+                    </div>
 
-        <nav className="bg-blue-700 text-white shadow">
+                    <span className="text-sm font-semibold text-slate-900">
+                        Vehicle Inventory
+                    </span>
+                </div>
 
-            <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
+                <div className="flex items-center gap-3">
+                    <span
+                        className={`rounded-md border px-2.5 py-1 text-xs font-medium
+                        ${role === "ADMIN"
+                                ? "border-blue-200 bg-blue-50 text-blue-700"
+                                : "border-slate-200 bg-slate-50 text-slate-600"
+                            }`}
+                    >
+                        {role}
+                    </span>
 
-                <h1 className="text-2xl font-bold">
-                    🚗 Vehicle Inventory
-                </h1>
-
-                <button
-                    onClick={logout}
-                    className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
-                >
-                    Logout
-                </button>
-
+                    <button
+                        onClick={logout}
+                        className="rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 transition-all duration-200 hover:border-slate-300 hover:bg-slate-50"
+                    >
+                        Log out
+                    </button>
+                </div>
             </div>
-
-        </nav>
+        </header>
     );
 }
 

@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const defaultValues = {
+    make: "",
+    model: "",
+    category: "",
+    price: "",
+    quantity: "",
+};
 
 function VehicleForm({ initialValues, onSubmit, submitText }) {
-    const [formData, setFormData] = useState(
-        initialValues || {
-            make: "",
-            model: "",
-            category: "",
-            price: "",
-            quantity: "",
-        }
-    );
+    const [formData, setFormData] = useState(initialValues || defaultValues);
+
+    useEffect(() => {
+        setFormData(initialValues || defaultValues);
+    }, [initialValues]);
 
     const handleChange = (e) => {
         setFormData({
@@ -39,61 +43,99 @@ function VehicleForm({ initialValues, onSubmit, submitText }) {
         });
     };
 
+    const inputClassName =
+        "w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-200 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                    <label htmlFor="make" className="mb-1.5 block text-sm font-medium text-slate-700">
+                        Make
+                    </label>
 
-            <input
-                type="text"
-                name="make"
-                placeholder="Make"
-                value={formData.make}
-                onChange={handleChange}
-                className="w-full border rounded p-2"
-            />
+                    <input
+                        id="make"
+                        type="text"
+                        name="make"
+                        placeholder="Toyota"
+                        value={formData.make}
+                        onChange={handleChange}
+                        className={inputClassName}
+                    />
+                </div>
 
-            <input
-                type="text"
-                name="model"
-                placeholder="Model"
-                value={formData.model}
-                onChange={handleChange}
-                className="w-full border rounded p-2"
-            />
+                <div>
+                    <label htmlFor="model" className="mb-1.5 block text-sm font-medium text-slate-700">
+                        Model
+                    </label>
 
-            <input
-                type="text"
-                name="category"
-                placeholder="Category"
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full border rounded p-2"
-            />
+                    <input
+                        id="model"
+                        type="text"
+                        name="model"
+                        placeholder="Fortuner"
+                        value={formData.model}
+                        onChange={handleChange}
+                        className={inputClassName}
+                    />
+                </div>
 
-            <input
-                type="number"
-                name="price"
-                placeholder="Price"
-                value={formData.price}
-                onChange={handleChange}
-                className="w-full border rounded p-2"
-            />
+                <div>
+                    <label htmlFor="category" className="mb-1.5 block text-sm font-medium text-slate-700">
+                        Category
+                    </label>
 
-            <input
-                type="number"
-                name="quantity"
-                placeholder="Quantity"
-                value={formData.quantity}
-                onChange={handleChange}
-                className="w-full border rounded p-2"
-            />
+                    <input
+                        id="category"
+                        type="text"
+                        name="category"
+                        placeholder="SUV"
+                        value={formData.category}
+                        onChange={handleChange}
+                        className={inputClassName}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="price" className="mb-1.5 block text-sm font-medium text-slate-700">
+                        Price
+                    </label>
+
+                    <input
+                        id="price"
+                        type="number"
+                        name="price"
+                        placeholder="2500000"
+                        value={formData.price}
+                        onChange={handleChange}
+                        className={inputClassName}
+                    />
+                </div>
+
+                <div className="sm:col-span-2">
+                    <label htmlFor="quantity" className="mb-1.5 block text-sm font-medium text-slate-700">
+                        Quantity
+                    </label>
+
+                    <input
+                        id="quantity"
+                        type="number"
+                        name="quantity"
+                        placeholder="10"
+                        value={formData.quantity}
+                        onChange={handleChange}
+                        className={inputClassName}
+                    />
+                </div>
+            </div>
 
             <button
                 type="submit"
-                className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+                className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700"
             >
                 {submitText}
             </button>
-
         </form>
     );
 }
