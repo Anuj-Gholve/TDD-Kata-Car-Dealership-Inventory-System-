@@ -1,173 +1,155 @@
 # PROMPTS.md
 
-# AI Prompt History
+# AI Tooling History
 
-This document summarizes the primary AI prompts and interactions used during the development of the **Vehicle Inventory Management System** for the Incubyte Full Stack Assessment.
+This document summarizes the prompts used during the development of the **Vehicle Inventory Management System**. AI was used as a development assistant for brainstorming, reviewing implementation approaches, debugging issues, improving documentation, and refining the overall project.
 
-Rather than generating the entire application automatically, AI was used as a development assistant for planning, debugging, reviewing implementation approaches, improving UI/UX, and refining documentation. All code was reviewed, modified, integrated, and tested manually before being committed.
-
----
-
-# Prompt 1 — Project Planning & Architecture
-
-**Objective**
-
-Design the overall application architecture while keeping the implementation strictly within the assessment requirements.
-
-**AI Assistance**
-
-- Planned project folder structure
-- Selected technology stack
-- Designed layered backend architecture
-- Defined REST API endpoints
-- Planned authentication workflow
-- Planned database schema
-- Suggested frontend routing structure
+> **Note:** This is a curated record of the prompts used throughout development and is intended to document AI assistance transparently.
 
 ---
 
-# Prompt 2 — Backend Development
+# Project Planning
 
-**Objective**
+### Prompt
 
-Implement the backend incrementally using RESTful APIs.
+> Suggest a scalable folder structure for a full-stack Vehicle Inventory Management System using Express, Prisma, SQLite, React, and Tailwind CSS.
 
-**AI Assistance**
+### Prompt
 
-- User Registration
-- User Login
-- JWT Authentication
-- Password Hashing
-- Prisma ORM integration
-- SQLite configuration
-- Vehicle CRUD operations
-- Search functionality
-- Purchase workflow
-- Restock workflow
-- Role-Based Authorization
+> Explain how to organize the backend using Routes, Controllers, Services, and Repositories.
+
+### Prompt
+
+> Review the planned project architecture and suggest improvements.
 
 ---
 
-# Prompt 3 — Testing Strategy
+# Database Design
 
-**Objective**
+### Prompt
 
-Implement backend testing and validate business logic.
+> Review the Prisma schema for the Vehicle model and suggest any improvements.
 
-**AI Assistance**
+### Prompt
 
-- Jest configuration
-- Unit testing guidance
-- Integration testing guidance
-- Authentication testing
-- Business logic validation
-- Edge-case identification
-- Coverage review
+> Recommend a clean database structure for managing vehicle inventory.
 
 ---
 
-# Prompt 4 — Frontend Development
+# Authentication & Authorization
 
-**Objective**
+### Prompt
 
-Develop a modern React Single Page Application.
+> Explain how JWT authentication should be implemented in an Express application.
 
-**AI Assistance**
+### Prompt
 
-- Authentication pages
-- Dashboard implementation
-- React Router setup
-- Axios integration
-- Protected routes
-- Vehicle listing
-- Search functionality
-- Admin management interface
-- Component organization
+> Review the authentication middleware and suggest improvements.
+
+### Prompt
+
+> Help verify the implementation of role-based authorization for admin users.
 
 ---
 
-# Prompt 5 — UI/UX Refinement
+# Vehicle Management APIs
 
-**Objective**
+### Prompt
 
-Improve the visual design and user experience without changing business logic.
+> Review the CRUD implementation for vehicle management.
 
-**AI Assistance**
+### Prompt
 
-- Dashboard redesign
-- Navbar redesign
-- Card layout improvements
-- Form improvements
-- Responsive layout
-- Typography refinement
-- Tailwind CSS improvements
-- Accessibility suggestions
+> Suggest a flexible search implementation using optional filters.
+
+### Prompt
+
+> Discuss a clean approach for implementing purchase and restock functionality.
 
 ---
 
-# Prompt 6 — Debugging & Code Review
+# Frontend Development
 
-**Objective**
+### Prompt
 
-Resolve implementation issues and improve maintainability.
+> Suggest improvements for the dashboard layout and user experience.
 
-**AI Assistance**
+### Prompt
 
-- JWT debugging
-- Prisma troubleshooting
-- Authentication fixes
-- API integration debugging
-- React state management
-- Repository pattern review
-- Code organization improvements
+> Recommend a clean SaaS-style interface using Tailwind CSS.
 
----
+### Prompt
 
-# Prompt 7 — Documentation
+> Review the React component structure and suggest improvements.
 
-**Objective**
+### Prompt
 
-Prepare the project for submission.
-
-**AI Assistance**
-
-- README structure
-- Project overview
-- Setup instructions
-- API documentation
-- Screenshot organization
-- Test report guidance
-- Assessment checklist review
+> Suggest UI improvements for forms, tables, and navigation.
 
 ---
 
-# AI Tools Used
+# Testing & Debugging
 
-- ChatGPT
-- Cursor AI
+### Prompt
+
+> Review the Jest test suite and suggest additional test cases.
+
+### Prompt
+
+> Help investigate failing backend tests.
+
+### Prompt
+
+> Review the authorization logic after receiving HTTP 403 responses during testing.
+
+### Prompt
+
+> Help trace why the purchase workflow was updating inventory incorrectly.
+
+### Prompt
+
+> Review the fixes and verify that the backend test suite passes successfully.
 
 ---
 
-# How AI Was Used
+# Documentation
 
-AI assisted throughout the project by helping with:
+### Prompt
 
-- Software architecture discussions
-- Debugging implementation issues
-- Reviewing backend design
-- Improving frontend UI/UX
-- Explaining framework and library concepts
-- Testing strategy
-- Documentation improvements
+> Review the README and suggest improvements for clarity and completeness.
 
-AI was used as a development assistant rather than an automatic code generator.
+### Prompt
 
-Every suggestion was manually reviewed, modified where necessary, tested locally, and integrated only after verifying correctness.
+> Help prepare a test report summarizing the backend test execution.
+
+### Prompt
+
+> Suggest how to organize project documentation for the assessment submission.
 
 ---
 
-# Reflection
+# Final Review
 
-Using AI significantly improved development efficiency by reducing time spent researching implementation details and debugging issues. It also helped explore alternative approaches to architecture, testing, and UI design.
+### Prompt
 
-The final implementation, integration, testing, and submission decisions remained my responsibility.
+> Perform a final review of the repository and recommend improvements before submission.
+
+### Prompt
+
+> Review the overall project structure, documentation, and testing to ensure the repository is ready for assessment.
+
+---
+
+# AI Usage Summary
+
+AI was used throughout the project as a development assistant to:
+
+- Discuss project architecture
+- Review implementation approaches
+- Clarify backend concepts
+- Troubleshoot bugs and failing tests
+- Suggest UI and UX improvements
+- Improve project documentation
+- Perform a final review before submission
+
+All implementation decisions, code integration, testing, debugging, and final verification were completed as part of the development process before submission.
