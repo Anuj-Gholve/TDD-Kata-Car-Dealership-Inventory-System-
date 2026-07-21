@@ -5,7 +5,6 @@ const vehicleController = require("../controllers/vehicle.controller");
 
 const router = express.Router();
 
-// Protected routes
 router.get("/search", verifyToken, vehicleController.searchVehicles);
 router.get("/", verifyToken, vehicleController.getAllVehicles);
 
@@ -13,7 +12,6 @@ router.post("/", verifyToken, vehicleController.createVehicle);
 
 router.post("/:id/purchase", verifyToken, vehicleController.purchaseVehicle);
 
-// Admin only
 router.post(
     "/:id/restock",
     verifyToken,
@@ -23,7 +21,6 @@ router.post(
 
 router.put("/:id", verifyToken, vehicleController.updateVehicle);
 
-// Admin only
 router.delete(
     "/:id",
     verifyToken,
