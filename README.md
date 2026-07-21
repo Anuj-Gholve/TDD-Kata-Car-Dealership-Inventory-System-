@@ -2,24 +2,30 @@
 
 A modern full-stack **Vehicle Inventory Management System** developed as part of the **Incubyte Full Stack Assessment**.
 
-The application enables secure inventory management through authentication, role-based authorization, vehicle lifecycle management, purchasing workflows, inventory restocking, and an intuitive dashboard built with React and Tailwind CSS.
+The application enables secure vehicle inventory management through authentication, role-based authorization, vehicle lifecycle management, purchasing workflows, inventory restocking, and a responsive React dashboard.
+
+The project demonstrates clean backend architecture, RESTful API design, database integration using Prisma ORM, unit testing with Jest, and a modern frontend built using React and Tailwind CSS.
 
 ---
 
 # Project Overview
 
-This application simulates a dealership inventory management platform where authenticated users can browse and purchase vehicles while administrators can manage the complete inventory.
+This application simulates a dealership inventory management platform where authenticated users can browse and purchase vehicles while administrators can efficiently manage the complete inventory.
 
-The project demonstrates:
+The project focuses on building a maintainable and scalable full-stack application while following modern software engineering practices.
 
-- RESTful API development
+Key concepts demonstrated include:
+
+- RESTful API Development
+- Layered Backend Architecture
 - JWT Authentication
 - Role-Based Authorization
-- Layered Backend Architecture
+- Prisma ORM
+- SQLite Database Integration
 - React Single Page Application
-- Database Integration using Prisma ORM
-- Unit Testing using Jest
-- Responsive UI with Tailwind CSS
+- Responsive UI using Tailwind CSS
+- Unit Testing with Jest
+- Git-based Version Control
 
 ---
 
@@ -28,27 +34,28 @@ The project demonstrates:
 ## Authentication
 
 - User Registration
-- User Login
-- JWT Authentication
+- Secure User Login
 - Password Hashing using bcrypt
-- Protected Routes
+- JWT-based Authentication
+- Protected API Routes
 
 ---
 
 ## Vehicle Inventory
 
-- View Vehicles
+- Browse Available Vehicles
 - Search Vehicles
 - Purchase Vehicles
-- Real-time Stock Updates
+- Automatic Stock Updates
+- Inventory Validation
 
 ---
 
 ## Administrator Features
 
-- Add Vehicle
-- Edit Vehicle
-- Delete Vehicle
+- Add New Vehicle
+- Edit Vehicle Details
+- Delete Vehicles
 - Restock Inventory
 - Role-Based Access Control
 
@@ -60,8 +67,9 @@ The project demonstrates:
 - Modern Dashboard
 - Search & Filtering
 - Clean Navigation
-- Reusable Components
+- Reusable React Components
 - Accessible Forms
+- Loading & Error Handling
 
 ---
 
@@ -77,30 +85,37 @@ The project demonstrates:
 # Architecture
 
 ```
-React
-   │
-Axios
-   │
-Express API
-   │
+
+Client (React + Vite)
+        │
+        ▼
+Express REST API
+        │
+        ▼
 Controllers
-   │
+        │
+        ▼
 Services
-   │
+        │
+        ▼
 Repositories
-   │
+        │
+        ▼
 Prisma ORM
-   │
-SQLite
+        │
+        ▼
+SQLite Database
+
 ```
 
-The backend follows a layered architecture to maintain separation of concerns and improve maintainability.
+The backend follows a layered architecture that separates routing, business logic, data access, and persistence, improving maintainability, scalability, and testability.
 
 ---
 
 # Project Structure
 
 ```
+
 .
 ├── backend
 │   ├── prisma
@@ -110,7 +125,7 @@ The backend follows a layered architecture to maintain separation of concerns an
 │   │   ├── repositories
 │   │   ├── routes
 │   │   ├── services
-│   │   └── ...
+│   │   └── tests
 │   └── package.json
 │
 ├── frontend
@@ -121,11 +136,12 @@ The backend follows a layered architecture to maintain separation of concerns an
 │   │   └── ...
 │   └── package.json
 │
-├── assets
-│
+├── assets/
 ├── PROMPTS.md
-│
+├── AI_REVIEW_SESSION.md
+├── TEST_REPORT.md
 └── README.md
+
 ```
 
 ---
@@ -133,22 +149,22 @@ The backend follows a layered architecture to maintain separation of concerns an
 # REST API
 
 | Method | Endpoint | Description |
-|----------|----------------------------|---------------------------|
-| POST | `/auth/register` | Register User |
-| POST | `/auth/login` | Login User |
-| GET | `/vehicles` | Retrieve Vehicles |
-| GET | `/vehicles/search` | Search Vehicles |
-| POST | `/vehicles` | Add Vehicle |
-| PUT | `/vehicles/:id` | Update Vehicle |
-| DELETE | `/vehicles/:id` | Delete Vehicle |
-| POST | `/vehicles/:id/purchase` | Purchase Vehicle |
-| POST | `/vehicles/:id/restock` | Restock Vehicle |
+|----------|------------------------------|--------------------------------|
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Authenticate user and return JWT |
+| GET | `/vehicles` | Retrieve all vehicles |
+| GET | `/vehicles/search` | Search vehicles |
+| POST | `/vehicles` | Add a new vehicle *(Admin)* |
+| PUT | `/vehicles/:id` | Update vehicle details *(Admin)* |
+| DELETE | `/vehicles/:id` | Delete a vehicle *(Admin)* |
+| POST | `/vehicles/:id/purchase` | Purchase a vehicle |
+| POST | `/vehicles/:id/restock` | Restock inventory *(Admin)* |
 
 ---
 
 # Getting Started
 
-## Clone Repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/Anuj-Gholve/TDD-Kata-Car-Dealership-Inventory-System-.git
@@ -160,19 +176,37 @@ cd TDD-Kata-Car-Dealership-Inventory-System-
 
 # Backend Setup
 
+Navigate to the backend directory:
+
 ```bash
 cd backend
+```
 
+Install dependencies:
+
+```bash
 npm install
+```
 
+Generate the Prisma Client:
+
+```bash
 npx prisma generate
+```
 
+Apply database migrations:
+
+```bash
 npx prisma migrate dev
+```
 
+Start the backend server:
+
+```bash
 npm run dev
 ```
 
-Backend runs on
+The backend server will be available at:
 
 ```
 http://localhost:5000
@@ -182,15 +216,25 @@ http://localhost:5000
 
 # Frontend Setup
 
+Navigate to the frontend directory:
+
 ```bash
 cd frontend
+```
 
+Install dependencies:
+
+```bash
 npm install
+```
 
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Frontend runs on
+The frontend application will be available at:
 
 ```
 http://localhost:5173
@@ -200,29 +244,37 @@ http://localhost:5173
 
 # Database Setup
 
-Generate the Prisma client
+Generate the Prisma Client:
 
 ```bash
 npx prisma generate
 ```
 
-Run migrations
+Run database migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
-(Optional) Seed the database
+(Optional) Seed the database:
 
 ```bash
 npx prisma db seed
+```
+
+Launch Prisma Studio to inspect the database:
+
+```bash
+npx prisma studio
 ```
 
 ---
 
 # Running Tests
 
-Backend tests are implemented using **Jest**.
+Backend unit tests are implemented using **Jest**.
+
+Run the test suite:
 
 ```bash
 cd backend
@@ -230,33 +282,44 @@ cd backend
 npm test
 ```
 
+A detailed test execution summary is available in **TEST_REPORT.md**.
+
 ---
 
 # Demo Credentials
 
+If the database has been seeded, you can use the following credentials to explore the application.
+
 ## Administrator
 
 ```
-Email:
-admin@example.com
-
-Password:
-Admin@123
+Email: admin@example.com
+Password: Admin@123
 ```
+
+Administrator privileges include:
+
+- Add Vehicle
+- Edit Vehicle
+- Delete Vehicle
+- Restock Inventory
 
 ---
 
 ## Standard User
 
 ```
-Email:
-user@example.com
-
-Password:
-User@123
+Email: user@example.com
+Password: User@123
 ```
 
-> If seed data is unavailable, register a new account before logging in.
+Standard users can:
+
+- Browse Vehicles
+- Search Inventory
+- Purchase Vehicles
+
+> **Note:** If seed data is unavailable, simply register a new account to access the application.
 
 ---
 
@@ -265,7 +328,7 @@ User@123
 ## Account Creation
 
 <p align="center">
-    <img src="./assets/Account Creation.png" width="900">
+    <img src="./assets/Account Creation.png" width="900" alt="Account Creation">
 </p>
 
 ---
@@ -273,7 +336,7 @@ User@123
 ## User Login
 
 <p align="center">
-    <img src="./assets/Account Signing In.png" width="900">
+    <img src="./assets/Account Signing In.png" width="900" alt="User Login">
 </p>
 
 ---
@@ -281,7 +344,7 @@ User@123
 ## User Dashboard
 
 <p align="center">
-    <img src="./assets/User Dashboard.png" width="900">
+    <img src="./assets/User Dashboard.png" width="900" alt="User Dashboard">
 </p>
 
 ---
@@ -289,7 +352,7 @@ User@123
 ## Vehicle Purchase
 
 <p align="center">
-    <img src="./assets/User Vehicle Purchase.png" width="900">
+    <img src="./assets/User Vehicle Purchase.png" width="900" alt="Vehicle Purchase">
 </p>
 
 ---
@@ -297,7 +360,7 @@ User@123
 ## Administrator Dashboard
 
 <p align="center">
-    <img src="./assets/Admin Dashboard.png" width="900">
+    <img src="./assets/Admin Dashboard.png" width="900" alt="Administrator Dashboard">
 </p>
 
 ---
@@ -305,7 +368,7 @@ User@123
 ## Add Vehicle
 
 <p align="center">
-    <img src="./assets/Admin Add Vehicle.png" width="900">
+    <img src="./assets/Admin Add Vehicle.png" width="900" alt="Add Vehicle">
 </p>
 
 ---
@@ -313,7 +376,7 @@ User@123
 ## Edit Vehicle
 
 <p align="center">
-    <img src="./assets/Admin Edit Vehicle.png" width="900">
+    <img src="./assets/Admin Edit Vehicle.png" width="900" alt="Edit Vehicle">
 </p>
 
 ---
@@ -321,7 +384,7 @@ User@123
 ## Restock Vehicle
 
 <p align="center">
-    <img src="./assets/Admin Restock Vehicle.png" width="900">
+    <img src="./assets/Admin Restock Vehicle.png" width="900" alt="Restock Vehicle">
 </p>
 
 ---
@@ -329,7 +392,7 @@ User@123
 ## Delete Vehicle
 
 <p align="center">
-    <img src="./assets/Admin Delete Vehicle.png" width="900">
+    <img src="./assets/Admin Delete Vehicle.png" width="900" alt="Delete Vehicle">
 </p>
 
 ---
@@ -337,7 +400,7 @@ User@123
 ## Prisma Studio – User Data
 
 <p align="center">
-    <img src="./assets/Prisma Studio User Data.png" width="900">
+    <img src="./assets/Prisma Studio User Data.png" width="900" alt="Prisma User Data">
 </p>
 
 ---
@@ -345,64 +408,104 @@ User@123
 ## Prisma Studio – Vehicle Data
 
 <p align="center">
-    <img src="./assets/Prisma Studio Vehicle Data.png" width="900">
+    <img src="./assets/Prisma Studio Vehicle Data.png" width="900" alt="Prisma Vehicle Data">
 </p>
 
 ---
 
 # My AI Usage
 
-This project was developed with the assistance of AI tools in accordance with the assessment guidelines.
+This project was developed with the assistance of AI tools in accordance with the assessment guidelines. AI was used as a development assistant throughout the project to accelerate development, improve code quality, and assist with debugging while ensuring that all implementation decisions remained under my control.
 
 ## AI Tools Used
 
-- ChatGPT
+- ChatGPT (OpenAI)
 - Cursor AI
 
 ## How AI Was Used
 
-AI was primarily used for:
+### Project Planning
 
-- Planning project architecture
-- Brainstorming backend design
-- Debugging implementation issues
-- Reviewing React components
-- Improving Tailwind CSS layouts
-- UI/UX refinement
-- Testing guidance
-- Documentation improvements
+- Brainstormed the overall application architecture.
+- Planned the layered backend architecture.
+- Designed REST API endpoints.
+- Discussed database schema design.
 
-Every AI-generated suggestion was manually reviewed, modified where necessary, tested, and integrated only after verifying correctness. Final implementation decisions, debugging, testing, and project integration remained my responsibility.
+### Backend Development
+
+- Reviewed Express.js implementation strategies.
+- Debugged authentication and authorization issues.
+- Assisted with Prisma ORM queries.
+- Reviewed repository and service layer implementations.
+
+### Frontend Development
+
+- Reviewed React component structure.
+- Improved Tailwind CSS layouts.
+- Refined responsive UI design.
+- Discussed state management approaches.
+
+### Testing
+
+- Discussed Jest testing strategies.
+- Reviewed backend unit tests.
+- Identified business logic edge cases.
+
+### Documentation
+
+- Improved README organization.
+- Reviewed project documentation.
+- Prepared submission artifacts.
+- Verified repository against assessment requirements.
+
+## Reflection
+
+AI significantly improved development efficiency by assisting with architecture discussions, debugging, documentation, UI refinement, and code reviews.
+
+Rather than generating the project automatically, AI was used as an interactive development assistant. Every AI-generated suggestion was manually reviewed, modified where necessary, tested locally, and integrated only after verifying correctness.
+
+Final implementation decisions, debugging, testing, integration, and submission remained my responsibility.
 
 ---
 
-# PROMPTS.md
+# AI Documentation
 
-The repository includes a separate **PROMPTS.md** file summarizing the major AI prompts and development stages used throughout the project, as required by the assessment.
+To maintain transparency regarding AI usage, the repository includes the following supporting documentation:
+
+| File | Description |
+|------|-------------|
+| **PROMPTS.md** | Documents the AI-assisted development interactions and major prompts used throughout the project. |
+| **AI_REVIEW_SESSION.md** | Documents the AI-assisted repository review, Git troubleshooting, and final submission preparation process. |
+| **TEST_REPORT.md** | Contains the backend unit test execution report using Jest. |
+
+These documents complement the **My AI Usage** section and provide additional context on how AI tools were used responsibly during development.
 
 ---
 
 # Known Limitations
 
 - SQLite is used for local development.
-- Authentication tokens are stored in localStorage.
-- Image upload is not implemented.
+- Authentication tokens are stored in browser localStorage.
+- Vehicle image upload is not implemented.
 - Pagination and sorting are not included.
-- No deployment configuration has been added.
+- Email verification is not implemented.
+- Cloud deployment is not configured.
 
 ---
 
 # Future Improvements
 
-- PostgreSQL Support
-- Docker Containerization
-- Cloud Deployment
-- Dashboard Analytics
-- Pagination
-- Sorting
-- Vehicle Images
-- Audit Logs
-- CI/CD Pipeline
+Potential enhancements for future versions include:
+
+- PostgreSQL or MySQL support
+- Docker containerization
+- Cloud deployment (Render / Railway / AWS)
+- Dashboard analytics
+- Advanced filtering and sorting
+- Vehicle image management
+- Audit logging
+- Refresh token authentication
+- CI/CD pipeline
 
 ---
 
@@ -416,20 +519,30 @@ GitHub: https://github.com/Anuj-Gholve
 
 ---
 
-## Assessment Checklist
+# Assessment Deliverables
 
-- RESTful Backend API
-- JWT Authentication
-- Role-Based Authorization
-- Prisma ORM
-- SQLite Database
-- React Frontend
-- Tailwind CSS
-- Vehicle CRUD Operations
-- Search Functionality
-- Purchase Workflow
-- Restock Workflow
-- Responsive UI
-- Unit Testing
-- Git Version Control
-- AI Usage Documentation
+This submission includes:
+
+- ✅ RESTful Backend API
+- ✅ Layered Backend Architecture
+- ✅ JWT Authentication
+- ✅ Role-Based Authorization
+- ✅ Prisma ORM
+- ✅ SQLite Database
+- ✅ React Frontend
+- ✅ Tailwind CSS
+- ✅ Vehicle CRUD Operations
+- ✅ Vehicle Search
+- ✅ Purchase Workflow
+- ✅ Inventory Restock
+- ✅ Jest Unit Tests
+- ✅ Git Version Control
+- ✅ Application Screenshots
+- ✅ Local Setup Instructions
+- ✅ AI Usage Documentation
+- ✅ PROMPTS.md
+- ✅ TEST_REPORT.md
+
+---
+
+Thank you for reviewing this project.
