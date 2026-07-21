@@ -35,6 +35,28 @@ npm test
 
 ## Test Execution Results
 
+### Initial Test Run
+
+During development, three backend tests failed due to:
+
+- Admin role mismatch in the JWT token used by the test suite.
+- Purchase endpoint ignoring the requested purchase quantity.
+- Purchase service always decrementing inventory by one instead of the requested quantity.
+
+These issues were identified, fixed, and verified before submission.
+
+#### Initial Test Output
+
+![Initial Test Run - Part 1](assets/Test-Before%201.png)
+
+![Initial Test Run - Part 2](assets/Test-Before%202.png)
+
+---
+
+### Final Test Run
+
+After fixing the authorization and purchase workflow issues, the complete backend test suite passed successfully.
+
 ```text
 > backend@1.0.0 test
 > jest --detectOpenHandles --runInBand
@@ -48,6 +70,10 @@ Snapshots:   0 total
 Time:        1.428 s
 Ran all test suites.
 ```
+
+#### Final Test Output
+
+![Final Test Run](assets/Test-After.png)
 
 ---
 
@@ -92,4 +118,4 @@ Ran all test suites.
 
 All automated backend tests passed successfully. The test suite validates the core functionality of the Vehicle Inventory Management System, including authentication, authorization, CRUD operations, vehicle search, purchasing, restocking, and inventory management workflows.
 
-The successful execution of all 17 tests demonstrates that the backend APIs behave as expected and meet the functional requirements of the assessment.
+The successful execution of all **17 backend tests** demonstrates that the application behaves as expected and satisfies the implemented functional requirements.
