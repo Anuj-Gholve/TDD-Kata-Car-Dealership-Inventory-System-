@@ -71,7 +71,8 @@ const deleteVehicle = async (req, res) => {
 const purchaseVehicle = async (req, res) => {
     try {
         const result = await vehicleService.purchaseVehicle(
-            req.params.id
+            req.params.id,
+            req.body.quantity
         );
 
         res.status(200).json(result);

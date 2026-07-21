@@ -47,20 +47,24 @@ const deleteVehicle = async (id) => {
     };
 };
 
-const purchaseVehicle = async (id) => {
+const purchaseVehicle = async (id, purchaseQuantity) => {
     const vehicle = await vehicleRepository.findVehicleById(id);
 
     if (!vehicle) {
         throw new Error("Vehicle not found");
     }
 
-    if (vehicle.quantity <= 0) {
+    if (purchaseQuantity <= 0) {
+        throw new Error("Invalid purchase quantity");
+    }
+
+    if (vehicle.quantity < purchaseQuantity) {
         throw new Error("Out of stock");
     }
 
     const updatedVehicle = await vehicleRepository.purchaseVehicle(
         id,
-        vehicle.quantity - 1
+        vehicle.quantity - purchaseQuantity
     );
 
     return {

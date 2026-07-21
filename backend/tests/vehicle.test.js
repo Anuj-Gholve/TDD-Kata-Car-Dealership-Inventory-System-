@@ -13,7 +13,7 @@ describe("Vehicle API", () => {
             {
                 id: 1,
                 email: "admin@test.com",
-                role: "admin",
+                role: "ADMIN",
             },
             process.env.JWT_SECRET
         );
@@ -274,7 +274,7 @@ describe("Vehicle API", () => {
             {
                 id: 2,
                 email: "user@test.com",
-                role: "user",
+                role: "USER",
             },
             process.env.JWT_SECRET
         );
